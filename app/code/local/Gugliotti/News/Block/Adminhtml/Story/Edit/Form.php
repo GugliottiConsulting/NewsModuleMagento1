@@ -5,13 +5,10 @@
 
 /**
  * Class Gugliotti_News_Block_Adminhtml_Story_Edit_Form
- *
  * Adminhtml Story Edit.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Block_Adminhtml_Story_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
@@ -25,6 +22,12 @@ class Gugliotti_News_Block_Adminhtml_Story_Edit_Form extends Mage_Adminhtml_Bloc
 		$this->setId('gugliotti_news_story_edit_form');
 	}
 
+    /**
+     * _prepareForm
+     *
+     * @return Mage_Adminhtml_Block_Widget_Form
+     * @throws Exception
+     */
 	protected function _prepareForm()
 	{
 		// prepare form
@@ -32,11 +35,14 @@ class Gugliotti_News_Block_Adminhtml_Story_Edit_Form extends Mage_Adminhtml_Bloc
 			array(
 				'id' => 'edit_form',
 				'method' => 'post',
-				'action' => $this->getUrl('*/*/save', array('story_id' => $this->getRequest()->getParam('story_id'))),
+				'action' => $this->getUrl(
+				    '*/*/save',
+                    array('story_id' => $this->getRequest()->getParam('story_id'))
+                ),
 				'enctype' => 'multipart/form-data',
 			)
 		);
-		$form->setHtmlIdPrefix('category_');
+		$form->setData('html_id_prefix', 'category_');
 
 		$fieldset = $form->addFieldset(
 			'base_fieldset',
@@ -55,6 +61,8 @@ class Gugliotti_News_Block_Adminhtml_Story_Edit_Form extends Mage_Adminhtml_Bloc
 				'required' => true,
 			)
 		);
+
+		$categoryOptions = Mage::getModel('gugliotti_news/source_categories')->toOptionArray();
 		$fieldset->addField(
 			'category',
 			'select',
@@ -63,7 +71,7 @@ class Gugliotti_News_Block_Adminhtml_Story_Edit_Form extends Mage_Adminhtml_Bloc
 				'label' => $this->__('Category'),
 				'title' => $this->__('Category'),
 				'required' => true,
-				'values' => Mage::getModel('gugliotti_news/source_categories')->toOptionArray(),
+				'values' => $categoryOptions,
 			)
 		);
 		$fieldset->addField(
@@ -75,6 +83,8 @@ class Gugliotti_News_Block_Adminhtml_Story_Edit_Form extends Mage_Adminhtml_Bloc
 				'title' => $this->__('Thumbnail'),
 			)
 		);
+
+		$contentConfig = Mage::getSingleton('cms/wysiwyg_config')->getConfig();
 		$fieldset->addField(
 			'content',
 			'editor',
@@ -84,10 +94,12 @@ class Gugliotti_News_Block_Adminhtml_Story_Edit_Form extends Mage_Adminhtml_Bloc
 				'title' => $this->__('Content'),
 				'required' => true,
 				'style' => 'height: 15em;',
-				'config'    => Mage::getSingleton('cms/wysiwyg_config')->getConfig(),
+				'config' => $contentConfig,
 				'wysiwyg' => true,
 			)
 		);
+
+		$statusValues = Mage::getModel('gugliotti_news/source_status')->toOptionArray();
 		$fieldset->addField(
 			'status',
 			'select',
@@ -96,7 +108,7 @@ class Gugliotti_News_Block_Adminhtml_Story_Edit_Form extends Mage_Adminhtml_Bloc
 				'label' => $this->__('Status'),
 				'title' => $this->__('Status'),
 				'required' => true,
-				'values' => Mage::getModel('gugliotti_news/source_status')->toOptionArray(),
+				'values' => $statusValues,
 			)
 		);
 
@@ -105,19 +117,28 @@ class Gugliotti_News_Block_Adminhtml_Story_Edit_Form extends Mage_Adminhtml_Bloc
 		if ($storyId) {
 			$model = Mage::getModel('gugliotti_news/story')->load($storyId);
 			if (!$model || !$model->getId()) {
-				Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when loading the story. Please, return to the previous page and try again'));
+				Mage::getSingleton('adminhtml/session')
+                    ->addError(
+                        $this->__(
+                            'There was an error when loading the story. Please, return to the previous page and try again'
+                        )
+                    );
 			}
 
 			// thumbnail full path
 			if ($model->getThumbnailPath()) {
-				$thumbnailFullPath = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . Mage::helper('gugliotti_news')->getMediaFolder() . DS . $model->getThumbnailPath();
+				$thumbnailFullPath = Mage::getBaseUrl(
+				    Mage_Core_Model_Store::URL_TYPE_MEDIA)
+                    . Mage::helper('gugliotti_news')->getMediaFolder()
+                    . DS
+                    . $model->getThumbnailPath();
 				$model->setData('thumbnail', $thumbnailFullPath);
 			}
 
 			$form->setValues($model->getData());
 		}
 
-		$form->setUseContainer(true);
+		$form->setData('use_container', true);
 		$this->setForm($form);
 		return parent::_prepareForm();
 	}

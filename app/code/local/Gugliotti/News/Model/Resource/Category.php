@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Model_Resource_Category
  *
  * Resource Model for Category.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Model_Resource_Category extends Mage_Core_Model_Resource_Db_Abstract

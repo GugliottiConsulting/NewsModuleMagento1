@@ -7,29 +7,38 @@
  * Class Gugliotti_News_Model_Story
  *
  * Model for Story.
- *
- * @method Gugliotti_News_Model_Story getTitle()
+ * @method string getTitle()
  * @method setTitle(string $title)
- * @method Gugliotti_News_Model_Story getThumbnailPath()
+ * @method string getThumbnailPath()
  * @method setThumbnailPath(string $thumbnailPath)
- * @method Gugliotti_News_Model_Story getContent()
+ * @method string getContent()
  * @method setContent(string $content)
  * @method boolean getStatus()
  * @method setStatus(boolean $status)
  * @method int getCategoryId()
  * @method setCategoryId(int $categoryId)
- * @method Gugliotti_News_Model_Story getCreatedAt()
- * @method Gugliotti_News_Model_Story getUpdatedAt()
+ * @method string getCreatedAt()
+ * @method string getUpdatedAt()
  * @method setUpdatedAt(string $updatedAt)
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Model_Story extends Mage_Core_Model_Abstract
 {
+    /**
+     * $_eventPrefix
+     * @var string
+     */
+    protected $_eventPrefix = 'gugliotti_news_story';
+
+    /**
+     * $_eventObject
+     * @var string
+     */
+    protected $_eventObject = 'story';
+
 	/**
 	 * Constructor
 	 */
@@ -67,7 +76,7 @@ class Gugliotti_News_Model_Story extends Mage_Core_Model_Abstract
 	 * getCategory
 	 *
 	 * Get Category from Story.
-	 * @return Gugliotti_News_Model_Category
+	 * @return Gugliotti_News_Model_Category|Mage_Core_Model_Abstract
 	 */
 	public function getCategory()
 	{

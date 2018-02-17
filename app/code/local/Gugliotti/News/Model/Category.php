@@ -7,29 +7,33 @@
  * Class Gugliotti_News_Model_Category
  *
  * Model for Category.
- *
- * @method Gugliotti_News_Model_Category getCode()
+ * @method string getCode()
  * @method setCode(string $code)
- * @method Gugliotti_News_Model_Category getLabel()
+ * @method string getLabel()
  * @method setLabel(string $label)
  * @method boolean getStatus()
  * @method setStatus(int $status)
- * @method Gugliotti_News_Model_Category getCreatedAt()
- * @method Gugliotti_News_Model_Category getUpdatedAt()
+ * @method string getCreatedAt()
+ * @method string getUpdatedAt()
  * @method setUpdatedAt(string $updatedAt)
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Model_Category extends Mage_Core_Model_Abstract
 {
 	/**
+     * $_eventPrefix
 	 * @var string
 	 */
 	protected $_eventPrefix = 'gugliotti_news_category';
+
+    /**
+     * $_eventObject
+     * @var string
+     */
+    protected $_eventObject = 'category';
 
 	/**
 	 * Constructor

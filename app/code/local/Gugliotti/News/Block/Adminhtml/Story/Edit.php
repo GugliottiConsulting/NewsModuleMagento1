@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Block_Adminhtml_Story_Edit
  *
  * Adminhtml Story Edit.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Block_Adminhtml_Story_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
@@ -59,7 +57,7 @@ class Gugliotti_News_Block_Adminhtml_Story_Edit extends Mage_Adminhtml_Block_Wid
 	{
 		parent::_prepareLayout();
 		if (Mage::getSingleton('cms/wysiwyg_config')->isEnabled()) {
-			$this->getLayout()->getBlock('head')->setCanLoadTinyMce(true);
+			$this->getLayout()->getBlock('head')->setData('can_load_tiny_mce', true);
 		}
 	}
 }

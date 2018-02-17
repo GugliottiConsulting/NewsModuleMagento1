@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Helper_Data
  *
  * Gugliotti News Main Helper.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Helper_Data extends Mage_Core_Helper_Abstract
@@ -94,7 +92,11 @@ class Gugliotti_News_Helper_Data extends Mage_Core_Helper_Abstract
 					return false;
 				}
 			} else {
-				Mage::log('Gugliotti_News_Helper_Data: a not valid path was passed to the method, the file was not found. Full path: ' . $fullPath);
+				Mage::log(
+				    __CLASS__ .
+                    ': a not valid path was passed to the method, the file was not found. Full path: '
+                    . $fullPath
+                );
 				return false;
 			}
 		}

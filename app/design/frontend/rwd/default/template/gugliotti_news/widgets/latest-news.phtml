@@ -8,8 +8,7 @@
  *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 ?>
@@ -18,7 +17,7 @@
     $stories = $this->getLatestNews();
     $helper = Mage::helper('gugliotti_news');
 ?>
-<?php if ($stories->count()) : ?>
+<?php if ($stories->getSize() > 0) : ?>
 <div id="latest-news">
     <h2><?php echo $this->__('Latest News'); ?></h2>
     <ul>

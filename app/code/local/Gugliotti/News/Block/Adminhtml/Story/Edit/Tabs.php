@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Block_Adminhtml_Story_Edit_Tabs
  *
  * Adminhtml Story Edit.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Block_Adminhtml_Story_Edit_Tabs extends Mage_Adminhtml_Block_Widget_Tabs
@@ -32,13 +30,18 @@ class Gugliotti_News_Block_Adminhtml_Story_Edit_Tabs extends Mage_Adminhtml_Bloc
 	 */
 	protected function _beforeToHtml()
 	{
-		$this->addTab(
-			'category_details',
-			array(
-				'label' => $this->__('Story Details'),
-				'title' => $this->__('Story Details'),
-			)
-		);
+	    try {
+            $this->addTab(
+                'category_details',
+                array(
+                    'label' => $this->__('Story Details'),
+                    'title' => $this->__('Story Details'),
+                )
+            );
+        } catch (Exception $e) {
+	        Mage::logException($e);
+        }
+
 		return parent::_beforeToHtml();
 	}
 }

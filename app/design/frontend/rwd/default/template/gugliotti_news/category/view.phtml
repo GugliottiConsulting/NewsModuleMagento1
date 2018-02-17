@@ -8,14 +8,18 @@
  *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 ?>
 <?php
-    /** @var $stories Gugliotti_News_Block_Category */
-    $stories = $this->getNewsByCategory($this->getRequest()->getParam('id'));
+    try {
+        /** @var $stories Gugliotti_News_Block_Category */
+        $stories = $this->getNewsByCategory($this->getRequest()->getParam('id'));
+    } catch (Exception $e) {
+        Mage::logException($e);
+    }
+
     $helper = Mage::helper('gugliotti_news');
 ?>
 <?php if (!$stories->count()) : ?>

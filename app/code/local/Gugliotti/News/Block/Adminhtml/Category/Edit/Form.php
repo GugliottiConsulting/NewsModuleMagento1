@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Block_Adminhtml_Category_Edit_Form
  *
  * Adminhtml Category Edit.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Block_Adminhtml_Category_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
@@ -25,6 +23,12 @@ class Gugliotti_News_Block_Adminhtml_Category_Edit_Form extends Mage_Adminhtml_B
 		$this->setId('gugliotti_news_category_edit_form');
 	}
 
+    /**
+     * _prepareForm
+     *
+     * @return Mage_Adminhtml_Block_Widget_Form
+     * @throws Exception
+     */
 	protected function _prepareForm()
 	{
 		// prepare form
@@ -36,7 +40,7 @@ class Gugliotti_News_Block_Adminhtml_Category_Edit_Form extends Mage_Adminhtml_B
 				'enctype' => 'multipart/form-data',
 			)
 		);
-		$form->setHtmlIdPrefix('category_');
+		$form->setData('html_id_prefix', 'category_');
 
 		$fieldset = $form->addFieldset(
 			'base_fieldset',
@@ -65,6 +69,8 @@ class Gugliotti_News_Block_Adminhtml_Category_Edit_Form extends Mage_Adminhtml_B
 				'required' => true,
 			)
 		);
+
+		$statusValues = Mage::getModel('gugliotti_news/source_status')->toOptionArray();
 		$fieldset->addField(
 			'status',
 			'select',
@@ -73,7 +79,7 @@ class Gugliotti_News_Block_Adminhtml_Category_Edit_Form extends Mage_Adminhtml_B
 				'label' => $this->__('Status'),
 				'title' => $this->__('Status'),
 				'required' => true,
-				'values' => Mage::getModel('gugliotti_news/source_status')->toOptionArray(),
+				'values' => $statusValues,
 			)
 		);
 
@@ -87,7 +93,7 @@ class Gugliotti_News_Block_Adminhtml_Category_Edit_Form extends Mage_Adminhtml_B
 			$form->setValues($model->getData());
 		}
 
-		$form->setUseContainer(true);
+		$form->setData('use_container', true);
 		$this->setForm($form);
 		return parent::_prepareForm();
 	}

@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Block_Widgetlist
  *
  * Block for stories pages.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Block_Widgetlist extends Mage_Core_Block_Template implements Mage_Widget_Block_Interface

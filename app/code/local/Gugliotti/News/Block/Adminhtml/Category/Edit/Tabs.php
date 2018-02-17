@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Block_Adminhtml_Category_Edit_Tabs
  *
  * Adminhtml Category Edit.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Block_Adminhtml_Category_Edit_Tabs extends Mage_Adminhtml_Block_Widget_Tabs
@@ -29,16 +27,22 @@ class Gugliotti_News_Block_Adminhtml_Category_Edit_Tabs extends Mage_Adminhtml_B
 	/**
 	 * _beforeToHtml
 	 * @return Mage_Core_Block_Abstract
+     * @throws Exception
 	 */
 	protected function _beforeToHtml()
 	{
-		$this->addTab(
-			'category_details',
-			array(
-				'label' => $this->__('Category Details'),
-				'title' => $this->__('Category Details'),
-			)
-		);
+	    try {
+            $this->addTab(
+                'category_details',
+                array(
+                    'label' => $this->__('Category Details'),
+                    'title' => $this->__('Category Details'),
+                )
+            );
+        } catch (Exception $e) {
+	        Mage::logException($e);
+        }
+
 		return parent::_beforeToHtml();
 	}
 }

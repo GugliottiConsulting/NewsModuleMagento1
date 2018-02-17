@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Block_Adminhtml_Category_Grid
  *
  * Adminhtml Category Grid.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_Widget_Grid
@@ -48,70 +46,76 @@ class Gugliotti_News_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_
 	protected function _prepareColumns()
 	{
 		// adding columns
-		$this->addColumn(
-			'category_id',
-			array(
-				'index' => 'category_id',
-				'header' => $this->__('ID'),
-				'width' => 50,
-				'type' => 'number',
-			)
-		);
-		$this->addColumn(
-			'code',
-			array(
-				'index' => 'code',
-				'header' => $this->__('Code'),
-				'width' => 100,
-				'type' => 'text',
-			)
-		);
-		$this->addColumn(
-			'label',
-			array(
-				'index' => 'label',
-				'header' => $this->__('Label'),
-				'type' => 'text',
-			)
-		);
-		$this->addColumn(
-			'status',
-			array(
-				'index' => 'status',
-				'header' => $this->__('Status'),
-				'width' => 50,
-				'type' => 'options',
-				'options' => Mage::getModel('gugliotti_news/source_status')->toGridArray(),
-				'renderer' => 'gugliotti_news/adminhtml_renderer_status'
-			)
-		);
+        try {
+            $this->addColumn(
+                'category_id',
+                array(
+                    'index' => 'category_id',
+                    'header' => $this->__('ID'),
+                    'width' => 50,
+                    'type' => 'number',
+                )
+            );
+            $this->addColumn(
+                'code',
+                array(
+                    'index' => 'code',
+                    'header' => $this->__('Code'),
+                    'width' => 100,
+                    'type' => 'text',
+                )
+            );
+            $this->addColumn(
+                'label',
+                array(
+                    'index' => 'label',
+                    'header' => $this->__('Label'),
+                    'type' => 'text',
+                )
+            );
 
-		// adding actions to the last column
-		$this->addColumn('action',
-			array(
-				'header' =>  Mage::helper('customer')->__('Actions'),
-				'width' => '100',
-				'type' => 'action',
-				'getter' => 'getId',
-				'actions' => array(
-					array(
-						'caption' => $this->__('Edit'),
-						'url' => array('base' => '*/*/edit'),
-						'field' => 'category_id',
-					),
-					array(
-						'caption' => $this->__('Delete'),
-						'url' => array('base' => '*/*/delete'),
-						'field' => 'category_id',
-						'confirm' => $this->__('Are you sure you want to do this?'),
-					)
-				),
-				'filter' => false,
-				'sortable' => false,
-				'index' => 'stores',
-				'is_system' => true,
-			)
-		);
+            $statusOptions = Mage::getModel('gugliotti_news/source_status')->toGridArray();
+            $this->addColumn(
+                'status',
+                array(
+                    'index' => 'status',
+                    'header' => $this->__('Status'),
+                    'width' => 50,
+                    'type' => 'options',
+                    'options' => $statusOptions,
+                    'renderer' => 'gugliotti_news/adminhtml_renderer_status'
+                )
+            );
+
+            // adding actions to the last column
+            $this->addColumn('action',
+                array(
+                    'header' =>  Mage::helper('customer')->__('Actions'),
+                    'width' => '100',
+                    'type' => 'action',
+                    'getter' => 'getId',
+                    'actions' => array(
+                        array(
+                            'caption' => $this->__('Edit'),
+                            'url' => array('base' => '*/*/edit'),
+                            'field' => 'category_id',
+                        ),
+                        array(
+                            'caption' => $this->__('Delete'),
+                            'url' => array('base' => '*/*/delete'),
+                            'field' => 'category_id',
+                            'confirm' => $this->__('Are you sure you want to do this?'),
+                        )
+                    ),
+                    'filter' => false,
+                    'sortable' => false,
+                    'index' => 'stores',
+                    'is_system' => true,
+                )
+            );
+        } catch (Exception $e) {
+            Mage::logException($e);
+        }
 
 		// adding mass actions
 		$this->addExportType(
@@ -135,7 +139,7 @@ class Gugliotti_News_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_
 	{
 		// define entity id
 		$this->setMassactionIdField('category_id');
-		$this->getMassactionBlock()->setFormFieldName('categories');
+		$this->getMassactionBlock()->setData('form_field_name', 'categories');
 
 		// delete mass action
 		$this->getMassactionBlock()->addItem(
@@ -148,6 +152,7 @@ class Gugliotti_News_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_
 		);
 
 		// update status mass action
+        $statusValues = Mage::getModel('gugliotti_news/source_status')->toOptionArray();
 		$this->getMassactionBlock()->addItem(
 			'status',
 			array(
@@ -159,7 +164,7 @@ class Gugliotti_News_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_
 						'type' => 'select',
 						'class' => 'required-entry',
 						'label' => $this->__('Status'),
-						'values' => Mage::getModel('gugliotti_news/source_status')->toOptionArray(),
+						'values' => $statusValues,
 					)
 				),
 			)
@@ -172,7 +177,7 @@ class Gugliotti_News_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_
 	 * getRowUrl
 	 *
 	 * Prepare row URL, linking to edit action.
-	 * @param $row
+	 * @param Varien_Object $row
 	 * @return string
 	 */
 	public function getRowUrl($row)

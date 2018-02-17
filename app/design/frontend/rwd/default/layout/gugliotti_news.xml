@@ -29,7 +29,8 @@
             <action method="addCss"><stylesheet>news.css</stylesheet></action>
         </reference>
         <reference name="content">
-            <block type="gugliotti_news/category" name="gugliotti.news.category.list" as="gugliottiNewsCategoryList" template="gugliotti_news/category/list.phtml" />
+            <block type="gugliotti_news/category" name="gugliotti.news.category.list"
+                   as="gugliottiNewsCategoryList" template="gugliotti_news/category/list.phtml" />
         </reference>
     </gugliotti_news_category_list>
     <gugliotti_news_category_view>
@@ -42,7 +43,8 @@
             <action method="addCss"><stylesheet>news.css</stylesheet></action>
         </reference>
         <reference name="content">
-            <block type="gugliotti_news/category" name="gugliotti.news.category.view" as="gugliottiNewsCategoryView" template="gugliotti_news/category/view.phtml" />
+            <block type="gugliotti_news/category" name="gugliotti.news.category.view"
+                   as="gugliottiNewsCategoryView" template="gugliotti_news/category/view.phtml" />
         </reference>
     </gugliotti_news_category_view>
     <gugliotti_news_story_list>
@@ -55,7 +57,8 @@
             <action method="addCss"><stylesheet>news.css</stylesheet></action>
         </reference>
         <reference name="content">
-            <block type="gugliotti_news/story" name="gugliotti.news.story.list" as="gugliottiNewsStoryList" template="gugliotti_news/story/list.phtml" />
+            <block type="gugliotti_news/story" name="gugliotti.news.story.list"
+                   as="gugliottiNewsStoryList" template="gugliotti_news/story/list.phtml" />
         </reference>
     </gugliotti_news_story_list>
     <gugliotti_news_story_view>
@@ -68,7 +71,8 @@
             <action method="addCss"><stylesheet>news.css</stylesheet></action>
         </reference>
         <reference name="content">
-            <block type="gugliotti_news/story" name="gugliotti.news.story.view" as="gugliottiNewsStoryView" template="gugliotti_news/story/view.phtml" />
+            <block type="gugliotti_news/story" name="gugliotti.news.story.view"
+                   as="gugliottiNewsStoryView" template="gugliotti_news/story/view.phtml" />
         </reference>
     </gugliotti_news_story_view>
 </layout>

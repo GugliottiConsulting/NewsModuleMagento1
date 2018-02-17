@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Block_Adminhtml_Renderer_Status
  *
  * Grid renderer for status column.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Block_Adminhtml_Renderer_Status
@@ -21,7 +19,7 @@ class Gugliotti_News_Block_Adminhtml_Renderer_Status
 	 * render
 	 *
 	 * Used to render data for a grid column in a fancy way.
-	 * @param Varien_Object $row
+	 * @param Varien_Object|Gugliotti_News_Model_Story|Gugliotti_News_Model_Category $row
 	 * @return string
 	 */
 	public function render(Varien_Object $row)

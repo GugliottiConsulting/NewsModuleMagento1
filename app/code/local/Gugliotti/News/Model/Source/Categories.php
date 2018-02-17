@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Model_Source_Categories
  *
  * Categories list for dropdown menus.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Model_Source_Categories
@@ -42,14 +40,28 @@ class Gugliotti_News_Model_Source_Categories
 	 * toGridArray
 	 *
 	 * Returns toOptionArray method as options to grid column.
-	 * @return array
+	 * @return bool|array
 	 */
 	public function toGridArray()
 	{
+	    // get options
+	    try {
+	        $optionsArray = $this->toOptionArray();
+        } catch (Exception $e) {
+	        Mage::logException($e);
+	        return false;
+        }
+
+        if (!$optionsArray) {
+	        return false;
+        }
+
+        // prepare new array
 		$array = array();
-		foreach ($this->toOptionArray() as $option) {
+		foreach ($optionsArray as $option) {
 			$array[$option['value']] = $option['label'];
 		}
+
 		return $array;
 	}
 }

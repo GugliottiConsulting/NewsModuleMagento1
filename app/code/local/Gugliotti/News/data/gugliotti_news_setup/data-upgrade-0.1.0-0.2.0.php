@@ -7,11 +7,9 @@
  * Gugliotti News Installer
  *
  * Gugliotti News Data Installer.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
- * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @version 0.2.0
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 

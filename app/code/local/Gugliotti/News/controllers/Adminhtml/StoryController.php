@@ -51,9 +51,11 @@ class Gugliotti_News_Adminhtml_StoryController extends Mage_Adminhtml_Controller
 	{
 		// prepare model
 		if ($this->getRequest()->getParam('story_id')) {
-			$model = Mage::getModel('gugliotti_news/story')->load($this->getRequest()->getParam('story_id'));
+			$model = Mage::getModel('gugliotti_news/story')
+                ->load($this->getRequest()->getParam('story_id'));
 			if (!$model || !$model->getId()) {
-				Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when loading the story. Please, try again.'));
+				Mage::getSingleton('adminhtml/session')
+                    ->addError($this->__('There was an error when loading the story. Please, try again.'));
 				return $this->_redirect('*/*/');
 			}
 		} else {
@@ -66,21 +68,24 @@ class Gugliotti_News_Adminhtml_StoryController extends Mage_Adminhtml_Controller
 		$categoryId = $this->getRequest()->getPost('category');
 
 		if (!$title || !$content || !$categoryId) {
-			Mage::getSingleton('adminhtml/session')->addError($this->__('A required field was not informed. Please, verify your form.'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('A required field was not informed. Please, verify your form.'));
 			return $this->_redirect('*/*/');
 		}
 
 		// verify if the category ID is a valid one
 		$category = Mage::getModel('gugliotti_news/category')->load($categoryId);
 		if (!$category || !$category->getId()) {
-			Mage::getSingleton('adminhtml/session')->addError($this->__('The selected category does not exist. Please, verify your form.'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('The selected category does not exist. Please, verify your form.'));
 			return $this->_redirect('*/*/');
 		}
 
 		// handle image upload
 		$thumbnailPath = null;
 		if (isset($_FILES['thumbnail']['name']) && (file_exists($_FILES['thumbnail']['tmp_name']))) {
-			$filePath = Mage::getBaseDir(Mage_Core_Model_Store::URL_TYPE_MEDIA) . DS . Mage::helper('gugliotti_news')->getMediaFolder();
+			$filePath = Mage::getBaseDir(Mage_Core_Model_Store::URL_TYPE_MEDIA)
+                . DS . Mage::helper('gugliotti_news')->getMediaFolder();
 
 			try {
 				$uploader = new Varien_File_Uploader('thumbnail');
@@ -90,7 +95,10 @@ class Gugliotti_News_Adminhtml_StoryController extends Mage_Adminhtml_Controller
 				$uploader->save($filePath, $_FILES['thumbnail']['name']);
 			} catch (Exception $e) {
 				Mage::logException($e);
-				Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when uploading the thumbnail for this story. Please, try again.'));
+				Mage::getSingleton('adminhtml/session')
+                    ->addError(
+                        $this->__('There was an error when uploading the thumbnail for this story. Please, try again.')
+                    );
 				return $this->_redirect('*/*/');
 			}
 
@@ -111,10 +119,12 @@ class Gugliotti_News_Adminhtml_StoryController extends Mage_Adminhtml_Controller
 			$model->setStatus($this->getRequest()->getPost('status'));
 			$model->setThumbnailPath($thumbnailPath);
 			$model->save();
-			Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The story was successfully saved'));
+			Mage::getSingleton('adminhtml/session')
+                ->addSuccess($this->__('The story was successfully saved'));
 		} catch (Exception $e) {
 			Mage::logException($e);
-			Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when saving the story. Please, try again'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('There was an error when saving the story. Please, try again'));
 		}
 
 		// redirect to edit page if Save and Continue was used
@@ -133,7 +143,8 @@ class Gugliotti_News_Adminhtml_StoryController extends Mage_Adminhtml_Controller
 		// get story ID
 		$storyId = $this->getRequest()->getParam('story_id');
 		if (!$storyId) {
-			Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when deleting this entry. Please, try again'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('There was an error when deleting this entry. Please, try again'));
 			return $this->_redirect('*/*/');
 		}
 
@@ -141,10 +152,12 @@ class Gugliotti_News_Adminhtml_StoryController extends Mage_Adminhtml_Controller
 		try {
 			$story = Mage::getModel('gugliotti_news/story')->load($storyId);
 			$story->delete();
-			Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The selected story was successfully deleted'));
+			Mage::getSingleton('adminhtml/session')
+                ->addSuccess($this->__('The selected story was successfully deleted'));
 		} catch (Exception $e) {
 			Mage::logException($e);
-			Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when deleting this entry. Please, try again'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('There was an error when deleting this entry. Please, try again'));
 		}
 		return $this->_redirect('*/*/');
 	}
@@ -157,7 +170,8 @@ class Gugliotti_News_Adminhtml_StoryController extends Mage_Adminhtml_Controller
 	{
 		$storiesIds = $this->getRequest()->getParam('stories');
 		if (!is_array($storiesIds)) {
-			Mage::getSingleton('adminhtml/session')->addError($this->__('You must select at least one story to be deleted.'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('You must select at least one story to be deleted.'));
 			return $this->_redirect('*/*/');
 		}
 
@@ -167,10 +181,12 @@ class Gugliotti_News_Adminhtml_StoryController extends Mage_Adminhtml_Controller
 				$story = Mage::getModel('gugliotti_news/story')->load($id);
 				$story->delete();
 			}
-			Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The selected stories were successfully deleted'));
+			Mage::getSingleton('adminhtml/session')
+                ->addSuccess($this->__('The selected stories were successfully deleted'));
 		} catch (Exception $e) {
 			Mage::logException($e);
-			Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when deleting some selected stories. Please, try again'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('There was an error when deleting some selected stories. Please, try again'));
 		}
 
 		return $this->_redirect('*/*/');
@@ -184,7 +200,8 @@ class Gugliotti_News_Adminhtml_StoryController extends Mage_Adminhtml_Controller
 	{
 		$storiesIds = $this->getRequest()->getParam('stories');
 		if (!is_array($storiesIds)) {
-			Mage::getSingleton('adminhtml/session')->addError($this->__('You must select at least one story to be updated.'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('You must select at least one story to be updated.'));
 			return $this->_redirect('*/*/');
 		}
 
@@ -196,10 +213,12 @@ class Gugliotti_News_Adminhtml_StoryController extends Mage_Adminhtml_Controller
 //				$story->setIsMassUpdate(true); // useful when updating indexed entities
 				$story->save();
 			}
-			Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The selected stories were successfully updated'));
+			Mage::getSingleton('adminhtml/session')
+                ->addSuccess($this->__('The selected stories were successfully updated'));
 		} catch (Exception $e) {
 			Mage::logException($e);
-			Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when updating some selected stories. Please, try again'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('There was an error when updating some selected stories. Please, try again'));
 		}
 
 		return $this->_redirect('*/*/');

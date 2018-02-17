@@ -8,13 +8,18 @@
  *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 ?>
 <?php
-	$story = Mage::getModel('gugliotti_news/story')->load($this->getRequest()->getParam('id'));
+    try {
+        /** @var Gugliotti_News_Model_Story $story */
+        $story = Mage::getModel('gugliotti_news/story')->load($this->getRequest()->getParam('id'));
+    } catch (Exception $e) {
+        Mage::logException($e);
+    }
+
 	$helper = Mage::helper('gugliotti_news');
 ?>
 <div class="story-wrapper">

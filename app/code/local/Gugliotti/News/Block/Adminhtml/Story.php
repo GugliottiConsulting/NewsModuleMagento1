@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Block_Adminhtml_Story
  *
  * Adminhtml Story Grid.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Block_Adminhtml_Story extends Mage_Adminhtml_Block_Widget_Grid_Container

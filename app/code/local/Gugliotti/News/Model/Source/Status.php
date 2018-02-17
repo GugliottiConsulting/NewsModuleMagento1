@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Model_Source_Status
  *
  * Status for Categories and Stories.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Model_Source_Status

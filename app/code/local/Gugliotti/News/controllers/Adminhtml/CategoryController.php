@@ -7,11 +7,9 @@
  * Class Gugliotti_News_Controller_Adminhtml_CategoryController
  *
  * Adminhtml controller for managing categories.
- *
  * @author Andre Gugliotti <andre@gugliotti.com.br>
  * @version 0.1.0
- * @category Training Modules
- * @package Gugliotti News
+ * @package Training Modules
  * @license GNU General Public License, version 3
  */
 class Gugliotti_News_Adminhtml_CategoryController extends Mage_Adminhtml_Controller_Action
@@ -51,9 +49,11 @@ class Gugliotti_News_Adminhtml_CategoryController extends Mage_Adminhtml_Control
 	{
 		// prepare model
 		if ($this->getRequest()->getParam('category_id')) {
-			$model = Mage::getModel('gugliotti_news/category')->load($this->getRequest()->getParam('category_id'));
+			$model = Mage::getModel('gugliotti_news/category')
+                ->load($this->getRequest()->getParam('category_id'));
 			if (!$model || !$model->getId()) {
-				Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when loading the category. Please, try again.'));
+				Mage::getSingleton('adminhtml/session')
+                    ->addError($this->__('There was an error when loading the category. Please, try again.'));
 				return $this->_redirect('*/*/');
 			}
 		} else {
@@ -65,7 +65,8 @@ class Gugliotti_News_Adminhtml_CategoryController extends Mage_Adminhtml_Control
 		$label = $this->getRequest()->getPost('label');
 
 		if (!$code || !$label) {
-			Mage::getSingleton('adminhtml/session')->addError($this->__('A required field was not informed. Please, verify your form.'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('A required field was not informed. Please, verify your form.'));
 			return $this->_redirect('*/*/');
 		}
 
@@ -75,10 +76,12 @@ class Gugliotti_News_Adminhtml_CategoryController extends Mage_Adminhtml_Control
 			$model->setLabel($label);
 			$model->setStatus($this->getRequest()->getPost('status'));
 			$model->save();
-			Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The category was successfully saved'));
+			Mage::getSingleton('adminhtml/session')
+                ->addSuccess($this->__('The category was successfully saved'));
 		} catch (Exception $e) {
 			Mage::logException($e);
-			Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when saving the category. Please, try again'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('There was an error when saving the category. Please, try again'));
 		}
 
 		// redirect to edit page if Save and Continue was used
@@ -97,7 +100,8 @@ class Gugliotti_News_Adminhtml_CategoryController extends Mage_Adminhtml_Control
 		// get category ID
 		$categoryId = $this->getRequest()->getParam('category_id');
 		if (!$categoryId) {
-			Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when deleting this entry. Please, try again'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('There was an error when deleting this entry. Please, try again'));
 			return $this->_redirect('*/*/');
 		}
 
@@ -105,10 +109,12 @@ class Gugliotti_News_Adminhtml_CategoryController extends Mage_Adminhtml_Control
 		try {
 			$category = Mage::getModel('gugliotti_news/category')->load($categoryId);
 			$category->delete();
-			Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The selected category was successfully deleted'));
+			Mage::getSingleton('adminhtml/session')
+                ->addSuccess($this->__('The selected category was successfully deleted'));
 		} catch (Exception $e) {
 			Mage::logException($e);
-			Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when deleting this entry. Please, try again'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('There was an error when deleting this entry. Please, try again'));
 		}
 		return $this->_redirect('*/*/');
 	}
@@ -121,7 +127,8 @@ class Gugliotti_News_Adminhtml_CategoryController extends Mage_Adminhtml_Control
 	{
 		$categoriesIds = $this->getRequest()->getParam('categories');
 		if (!is_array($categoriesIds)) {
-			Mage::getSingleton('adminhtml/session')->addError($this->__('You must select at least one category to be deleted.'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('You must select at least one category to be deleted.'));
 			return $this->_redirect('*/*/');
 		}
 
@@ -131,10 +138,12 @@ class Gugliotti_News_Adminhtml_CategoryController extends Mage_Adminhtml_Control
 				$category = Mage::getModel('gugliotti_news/category')->load($id);
 				$category->delete();
 			}
-			Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The selected categories were successfully deleted'));
+			Mage::getSingleton('adminhtml/session')
+                ->addSuccess($this->__('The selected categories were successfully deleted'));
 		} catch (Exception $e) {
 			Mage::logException($e);
-			Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when deleting some selected categories. Please, try again'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('There was an error when deleting some selected categories. Please, try again'));
 		}
 
 		return $this->_redirect('*/*/');
@@ -148,7 +157,8 @@ class Gugliotti_News_Adminhtml_CategoryController extends Mage_Adminhtml_Control
 	{
 		$categoriesIds = $this->getRequest()->getParam('categories');
 		if (!is_array($categoriesIds)) {
-			Mage::getSingleton('adminhtml/session')->addError($this->__('You must select at least one category to be updated.'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('You must select at least one category to be updated.'));
 			return $this->_redirect('*/*/');
 		}
 
@@ -160,10 +170,12 @@ class Gugliotti_News_Adminhtml_CategoryController extends Mage_Adminhtml_Control
 //				$category->setIsMassUpdate(true); // useful when updating indexed entities
 				$category->save();
 			}
-			Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The selected categories were successfully updated'));
+			Mage::getSingleton('adminhtml/session')
+                ->addSuccess($this->__('The selected categories were successfully updated'));
 		} catch (Exception $e) {
 			Mage::logException($e);
-			Mage::getSingleton('adminhtml/session')->addError($this->__('There was an error when updating some selected categories. Please, try again'));
+			Mage::getSingleton('adminhtml/session')
+                ->addError($this->__('There was an error when updating some selected categories. Please, try again'));
 		}
 
 		return $this->_redirect('*/*/');
