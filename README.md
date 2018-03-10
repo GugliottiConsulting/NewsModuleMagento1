@@ -9,11 +9,14 @@ Just clone the files into your project folder. After cleaning the cache, logging
 This module was thought to be used as support on Magento classes, containing models, controllers and templates that allows the student to see almost everything s/he must know to start to work with Magento 1. Currently, it contains:
 
 * SQL installer, using DDL calls
+* SQL upgrader
 * models for Category and Story objects
+* observers
 * controllers for backend grids and edit pages
 * controllers for frontend lists and single category / story view
 * blocks used to display this information
 * main helper
+* log helper
 * CSV translation file for en_US view
 * data install (as an upgrade from 0.1.0 to 0.2.0)
 * latest news widget
