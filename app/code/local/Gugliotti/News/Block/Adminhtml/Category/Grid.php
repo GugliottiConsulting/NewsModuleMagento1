@@ -90,7 +90,7 @@ class Gugliotti_News_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_
             // adding actions to the last column
             $this->addColumn('action',
                 array(
-                    'header' =>  Mage::helper('customer')->__('Actions'),
+                    'header' =>  Mage::helper('gugliotti_news')->__('Actions'),
                     'width' => '100',
                     'type' => 'action',
                     'getter' => 'getId',

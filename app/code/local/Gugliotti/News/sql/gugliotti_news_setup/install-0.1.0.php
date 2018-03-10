@@ -63,7 +63,7 @@ try {
     Mage::logException($e);
 }
 
-// prepare table for gugliotti_news_category
+// prepare table for gugliotti_news_story
 $tableStory = $installer->getConnection()->newTable($installer->getTable('gugliotti_news/story'));
 
 try {
