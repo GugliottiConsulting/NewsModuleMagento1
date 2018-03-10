@@ -110,5 +110,9 @@
             </general>
             <delete_images>1</delete_images>
         </gugliotti_news>
+        <log>
+            <log_enabled>0</log_enabled>
+            <log_file>gugliotti_news.log</log_file>
+        </log>
     </default>
 </config>

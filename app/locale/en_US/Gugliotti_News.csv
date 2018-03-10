@@ -9,3 +9,6 @@
 "Read More", "Read More"
 "There are no stories matching the selection.", "There are no stories matching the selection."
 "There are no categories matching the selection.", "There are no categories matching the selection."
+"Is the log enabled? Remember that logging must be enabled also on Developer tab, here on System > Configuration menu.", "Is the log enabled? Remember that logging must be enabled also on Developer tab, here on System > Configuration menu."
+"Log file", "Log file"
+"Inform the log file named, which will be created on /var/log folder on the server.", "Inform the log file named, which will be created on /var/log folder on the server."
