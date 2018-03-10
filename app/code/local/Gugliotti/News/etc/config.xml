@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Gugliotti_News>
-            <version>0.2.0</version>
+            <version>0.3.0</version>
         </Gugliotti_News>
     </modules>
     <global>
@@ -14,12 +14,6 @@
             <gugliotti_news_resource>
                 <class>Gugliotti_News_Model_Resource</class>
                 <entities>
-                    <gugliotti_news_category>
-                        <table>gugliotti_news_category</table>
-                    </gugliotti_news_category>
-                    <gugliotti_news_story>
-                        <table>gugliotti_news_story</table>
-                    </gugliotti_news_story>
                     <category>
                         <table>gugliotti_news_category</table>
                     </category>
@@ -46,6 +40,17 @@
                 </setup>
             </gugliotti_news_setup>
         </resources>
+        <events>
+            <gugliotti_news_category_load_after>
+                <observers>
+                    <gugliotti_news_change_category_code>
+                        <type>model</type>
+                        <class>Gugliotti_News_Model_Observers_Category</class>
+                        <method>changeCodeValue</method>
+                    </gugliotti_news_change_category_code>
+                </observers>
+            </gugliotti_news_category_load_after>
+        </events>
     </global>
     <admin>
         <routers>
@@ -75,6 +80,17 @@
                 </gugliotti_news>
             </updates>
         </layout>
+        <events>
+            <gugliotti_news_category_save_after>
+                <observers>
+                    <gugliotti_news_log_category_save>
+                        <type>model</type>
+                        <class>Gugliotti_News_Model_Observers_Category</class>
+                        <method>createLogEntry</method>
+                    </gugliotti_news_log_category_save>
+                </observers>
+            </gugliotti_news_category_save_after>
+        </events>
     </adminhtml>
     <frontend>
         <translate>
